@@ -12,7 +12,7 @@
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{this.Name}=${this.Value}");
+            sb.Append($"{this.Name}={this.Value}");
 
             return sb.ToString();
         }

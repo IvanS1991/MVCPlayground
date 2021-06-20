@@ -29,11 +29,16 @@ namespace MVCPlayground.Framework.Http.Headers
             return this.headers.Any(x => x.Name == name);
         }
 
-        public HttpHeader Get(string name)
+        public HttpHeader GetValue(string name)
         {
             Guard.AgainstNull(name, nameof(name));
 
             return this.headers.FirstOrDefault(x => x.Name == name);
+        }
+
+        public bool IsEmpty()
+        {
+            return !this.headers.Any();
         }
 
         public IEnumerator<HttpHeader> GetEnumerator()

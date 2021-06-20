@@ -17,13 +17,10 @@
                 .ToDictionary(prop => prop.First(), prop => prop.Last());
         }
 
-        public static Url Parse(string urlString)
-        {
-            Url url = new Url();
-
+        public static Url Parse(string urlString) {
             string[] pieces = urlString.Split('?', StringSplitOptions.RemoveEmptyEntries);
 
-            url.Path = pieces[0];
+            var url = new Url(pieces[0]);
 
             if (pieces.Length == 2) {
                 url.Query = Url.ParseQuery(pieces[1]);
@@ -33,7 +30,11 @@
         }
 
         public Url()
+            : this(null) { }
+
+        public Url(string path)
         {
+            this.Path = path;
             this.Query = new Dictionary<string, string>();
         }
 
