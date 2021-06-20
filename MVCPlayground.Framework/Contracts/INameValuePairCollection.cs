@@ -9,7 +9,7 @@
 
         bool Contains(string name);
 
-        T GetValue(string name);
+        T Get(string name);
 
         bool IsEmpty();
     }

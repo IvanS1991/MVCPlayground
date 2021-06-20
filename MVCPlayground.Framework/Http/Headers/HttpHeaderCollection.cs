@@ -29,7 +29,7 @@ namespace MVCPlayground.Framework.Http.Headers
             return this.headers.Any(x => x.Name == name);
         }
 
-        public HttpHeader GetValue(string name)
+        public HttpHeader Get(string name)
         {
             Guard.AgainstNull(name, nameof(name));
 

@@ -1,6 +1,6 @@
 ﻿namespace MVCPlayground.Framework.Http.Constants
 {
-    class HttpHeaderName
+    public class HttpHeaderName
     {
         public const string ContentType = "Content-Type";
         public const string ContentLength = "Content-Length";
