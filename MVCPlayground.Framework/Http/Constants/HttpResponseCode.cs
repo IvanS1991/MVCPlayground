@@ -3,6 +3,7 @@
     public enum HttpResponseCode
     {
         OK = 200,
+        Found = 302,
         NotFound = 404,
         InternalError = 500
     }

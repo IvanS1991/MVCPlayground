@@ -9,5 +9,6 @@
         public const string Server = "Server";
         public const string SetCookie = "Set-Cookie";
         public const string Cookie = "Cookie";
+        public const string Location = "Location";
     }
 }
