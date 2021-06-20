@@ -2,9 +2,9 @@
 {
     using System.Threading.Tasks;
     using MVCPlayground.Framework.Http;
-    using MVCPlayground.Framework.Http.Response.Content;
     using MVCPlayground.Framework.Http.Routing;
     using MVCPlayground.Framework.Logging;
+    using MVCPlayground.WebApp.Controllers;
 
     class Program
     {
@@ -15,8 +15,8 @@
             await server
                 .WithLogging(new ConsoleLogger())
                 .WithRouting(new HttpRoutingMap(), r => r
-                    .MapGet("/", req => new HtmlResponse("<h1>Works!</h1"))
-                    .MapGet("/Cats", req => new HtmlResponse("<h1>Cats</h1>"))
+                    .MapGet("/", req => new HomeController(req).Home())
+                    .MapGet("/Google", req => new RedirectController(req).GoogleSearch())
                 )
                 .Start();
         }
