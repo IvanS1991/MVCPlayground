@@ -89,7 +89,7 @@
         {
             HttpCookieCollection collection = new HttpCookieCollection();
 
-            var cookieHeader = headers.Get(HttpHeaderName.Cookie);
+            var cookieHeader = headers.GetValue(HttpHeaderName.Cookie);
 
             if (cookieHeader != null)
             {

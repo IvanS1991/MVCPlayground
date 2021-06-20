@@ -26,9 +26,14 @@
             return this.cookies.Any(x => x.Name == name);
         }
 
-        public HttpCookie Get(string name)
+        public HttpCookie GetValue(string name)
         {
             return this.cookies.FirstOrDefault(x => x.Name == name);
+        }
+
+        public bool IsEmpty()
+        {
+            return !this.cookies.Any();
         }
 
         public IEnumerator<HttpCookie> GetEnumerator()
@@ -39,6 +44,12 @@
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            return string.Join("; ", this.cookies
+                .Select(x => string.Join('=', x)));
         }
     }
 }

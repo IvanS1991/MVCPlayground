@@ -9,6 +9,8 @@
 
         bool Contains(string name);
 
-        T Get(string name);
+        T GetValue(string name);
+
+        bool IsEmpty();
     }
 }
