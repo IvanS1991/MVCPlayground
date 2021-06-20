@@ -17,6 +17,7 @@
                 .WithRouting(new HttpRoutingMap(), r => r
                     .MapGet("/", req => new HomeController(req).Home())
                     .MapGet("/Google", req => new RedirectController(req).GoogleSearch())
+                    .MapGet("/Login", req => new UserController(req).Login())
                 )
                 .Start();
         }
