@@ -2,6 +2,7 @@
 {
     using MVCPlayground.Framework.Common;
     using MVCPlayground.Framework.Http.Constants;
+    using MVCPlayground.Framework.Http.Cookies;
     using MVCPlayground.Framework.Http.Headers;
     using System;
     using System.Linq;
@@ -23,19 +24,22 @@
 
             this.Headers = HttpRequest.ParseHeaders(requestLines);
             this.Body = HttpRequest.ParseBody(requestLines, this.Headers.Count());
+            this.Cookies = HttpRequest.ParseCookies(this.Headers);
         }
 
         public HttpMethod Method { get; private set; }
 
-        public string Url { get; set; }
+        public Url Url { get; set; }
 
         public string HttpVersion { get; set; }
 
         public HttpHeaderCollection Headers { get; private set; }
 
+        public HttpCookieCollection Cookies { get; private set; }
+
         public string Body { get; private set; }
 
-        private static (HttpMethod, string, string) ParseEndpoint(string[] requestLines)
+        private static (HttpMethod, Url, string) ParseEndpoint(string[] requestLines)
         {
             string endpointLine = requestLines.First();
             string[] pieces = endpointLine.Split(" ");
@@ -50,7 +54,7 @@
 
             var method = Enum.Parse<HttpMethod>(methodString);
 
-            return (method, url, httpVersion);
+            return (method, Url.Parse(url), httpVersion);
         }
 
         private static HttpHeaderCollection ParseHeaders(string[] requestLines)
@@ -79,6 +83,30 @@
         private static string ParseBody(string[] requestLines, int headersCount)
         {
             return requestLines.Skip(2 + headersCount).First();
+        }
+
+        private static HttpCookieCollection ParseCookies(HttpHeaderCollection headers)
+        {
+            HttpCookieCollection collection = new HttpCookieCollection();
+
+            var cookieHeader = headers.Get(HttpHeaderName.Cookie);
+
+            if (cookieHeader != null)
+            {
+                var cookies = cookieHeader.Value
+                    .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(cookie => cookie.Trim()
+                        .Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .Where(x => x.Length == 2)
+                    .Select(x => new HttpCookie(x.First(), x.Last()));
+
+                foreach (var cookie in cookies)
+                {
+                    collection.Add(cookie);
+                }
+            }
+
+            return collection;
         }
 
         public override string ToString()

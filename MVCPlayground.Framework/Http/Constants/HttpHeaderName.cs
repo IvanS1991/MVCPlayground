@@ -7,5 +7,7 @@
         public const string ContentDisposition = "Content-Disposition";
         public const string Date = "Date";
         public const string Server = "Server";
+        public const string SetCookie = "Set-Cookie";
+        public const string Cookie = "Cookie";
     }
 }
