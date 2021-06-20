@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCPlayground.Framework", "MVCPlayground.Framework\MVCPlayground.Framework.csproj", "{9BF543C9-1BBF-4D7B-8C08-58B149845CBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCPlayground.WebApp", "MVCPlayground.WebApp\MVCPlayground.WebApp.csproj", "{D954CE0C-C1AE-47AF-9C85-F73C4BD84CCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BF543C9-1BBF-4D7B-8C08-58B149845CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF543C9-1BBF-4D7B-8C08-58B149845CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF543C9-1BBF-4D7B-8C08-58B149845CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF543C9-1BBF-4D7B-8C08-58B149845CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D954CE0C-C1AE-47AF-9C85-F73C4BD84CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D954CE0C-C1AE-47AF-9C85-F73C4BD84CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D954CE0C-C1AE-47AF-9C85-F73C4BD84CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D954CE0C-C1AE-47AF-9C85-F73C4BD84CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A727579D-9310-4580-8FD6-B4D1BC9F0D79}
+	EndGlobalSection
+EndGlobal
