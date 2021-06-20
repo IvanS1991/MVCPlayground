@@ -65,15 +65,20 @@
             return request;
         }
 
-        private async Task HandleResponse(NetworkStream stream, HttpRequest request)
+        private async Task WriteResponse(NetworkStream stream, HttpResponse response)
         {
-            HttpResponse response = this.routingMap.Handle(request);
-
             string responseText = response.ToString();
 
             await this.logger.Log(responseText);
 
             await stream.WriteAsync(Encoding.UTF8.GetBytes(responseText));
+        }
+
+        private async Task HandleResponse(NetworkStream stream, HttpRequest request)
+        {
+            HttpResponse response = this.routingMap.Handle(request);
+
+            await this.WriteResponse(stream, response);
         }
 
         private async Task HandleClient()
@@ -82,7 +87,9 @@
 
             await this.logger.Log($"Accepted client!");
 
-            using (var stream = client.GetStream())
+            using var stream = client.GetStream();
+
+            try
             {
                 if (stream.DataAvailable)
                 {
@@ -90,6 +97,10 @@
 
                     await this.HandleResponse(stream, request);
                 }
+            }
+            catch
+            {
+                await this.WriteResponse(stream, new InternalErrorResponse());
             }
 
             client.Close();

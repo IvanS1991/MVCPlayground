@@ -71,7 +71,7 @@
         {
             Guard.AgainstNull(request, nameof(request));
 
-            var key = this.GetHandlerKey(request.Method, request.Url);
+            var key = this.GetHandlerKey(request.Method, request.Url.Path);
 
             if (!this.handlers.ContainsKey(key))
             {
