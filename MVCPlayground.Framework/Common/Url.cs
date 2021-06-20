@@ -44,7 +44,7 @@
         public override string ToString()
         {
             string queryString = String.Join('&',
-                this.Query.Select(x => String.Join('=', x)));
+                this.Query.Select(x => $"{x.Key}={x.Value}"));
 
             return $"{this.Path}?{queryString}";
         }
