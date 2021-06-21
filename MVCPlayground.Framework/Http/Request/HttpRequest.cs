@@ -15,7 +15,7 @@
         {
             Guard.AgainstNull(requestText, nameof(requestText));
 
-            string[] requestLines = requestText.Split("\r\n");
+            string[] requestLines = requestText.Split(Environment.NewLine);
 
             var (method, url, httpVersion) = HttpRequest.ParseEndpoint(requestLines);
 

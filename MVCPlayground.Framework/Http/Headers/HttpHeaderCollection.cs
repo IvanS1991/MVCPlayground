@@ -4,6 +4,7 @@ namespace MVCPlayground.Framework.Http.Headers
 {
     using MVCPlayground.Framework.Common;
     using MVCPlayground.Framework.Contracts;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -53,7 +54,7 @@ namespace MVCPlayground.Framework.Http.Headers
 
         public override string ToString()
         {
-            return string.Join("\n", this.Select(x => x.ToString()));
+            return string.Join(Environment.NewLine, this.Select(x => x.ToString()));
         }
     }
 }
