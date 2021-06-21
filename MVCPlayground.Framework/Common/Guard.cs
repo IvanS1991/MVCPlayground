@@ -2,7 +2,7 @@
 
 namespace MVCPlayground.Framework.Common
 {
-    static class Guard
+    public static class Guard
     {
         public static void AgainstNull<T>(T value, string nameOf)
         {

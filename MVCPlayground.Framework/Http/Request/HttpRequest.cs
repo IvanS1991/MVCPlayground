@@ -5,6 +5,7 @@
     using MVCPlayground.Framework.Http.Cookies;
     using MVCPlayground.Framework.Http.Headers;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
@@ -14,7 +15,7 @@
         {
             Guard.AgainstNull(requestText, nameof(requestText));
 
-            string[] requestLines = requestText.Split("\r\n");
+            string[] requestLines = requestText.Split(Environment.NewLine);
 
             var (method, url, httpVersion) = HttpRequest.ParseEndpoint(requestLines);
 
@@ -23,21 +24,21 @@
             this.HttpVersion = httpVersion;
 
             this.Headers = HttpRequest.ParseHeaders(requestLines);
-            this.Body = HttpRequest.ParseBody(requestLines, this.Headers.Count());
             this.Cookies = HttpRequest.ParseCookies(this.Headers);
+            this.Body = HttpRequest.ParseBody(requestLines, this.Headers.Count());
         }
 
-        public HttpMethod Method { get; private set; }
+        public HttpMethod Method { get; }
 
-        public Url Url { get; set; }
+        public Url Url { get; }
 
-        public string HttpVersion { get; set; }
+        public string HttpVersion { get; }
 
-        public HttpHeaderCollection Headers { get; private set; }
+        public HttpHeaderCollection Headers { get; }
 
-        public HttpCookieCollection Cookies { get; private set; }
+        public HttpCookieCollection Cookies { get; }
 
-        public string Body { get; private set; }
+        public string Body { get;  }
 
         private static (HttpMethod, Url, string) ParseEndpoint(string[] requestLines)
         {
@@ -82,14 +83,21 @@
 
         private static string ParseBody(string[] requestLines, int headersCount)
         {
-            return requestLines.Skip(2 + headersCount).First();
+            IEnumerable<string> bodyLines = requestLines.Skip(2 + headersCount);
+
+            if (!bodyLines.Any())
+            {
+                return null;
+            }
+
+            return bodyLines.First();
         }
 
         private static HttpCookieCollection ParseCookies(HttpHeaderCollection headers)
         {
             HttpCookieCollection collection = new HttpCookieCollection();
 
-            var cookieHeader = headers.GetValue(HttpHeaderName.Cookie);
+            var cookieHeader = headers.Get(HttpHeaderName.Cookie);
 
             if (cookieHeader != null)
             {

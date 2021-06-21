@@ -26,7 +26,7 @@
             return this.cookies.Any(x => x.Name == name);
         }
 
-        public HttpCookie GetValue(string name)
+        public HttpCookie Get(string name)
         {
             return this.cookies.FirstOrDefault(x => x.Name == name);
         }
